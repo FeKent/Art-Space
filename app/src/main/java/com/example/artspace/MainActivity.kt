@@ -111,7 +111,7 @@ fun ArtSpaceLayout(
                 .padding(24.dp)
         )
 //        Spacer(modifier = Modifier.height(32.dp))
-        Text(text = stringResource(artworkInfo))
+        Text(text = stringResource(artworkInfo), color = Color.Gray)
         Spacer(modifier = Modifier.height(32.dp))
         Row(
             horizontalArrangement = Arrangement.Center,
