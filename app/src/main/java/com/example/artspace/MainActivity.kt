@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import com.example.artspace.ui.theme.ArtSpaceTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.font.FontStyle
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,15 +87,22 @@ fun ArtSpaceLayout(
     artwork: Int,
     contentDescriptionId: Int,
     artworkInfo: Int,
-    onBtnClick: () -> Unit
+    backButton: () -> Unit,
+    nextButton: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        Text(text = stringResource(artworkTitle))
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(22.dp))
+        Text(
+            text = stringResource(artworkTitle),
+            fontSize = 30.sp,
+            color = Color.Gray,
+            fontStyle = FontStyle.Italic
+        )
+        Spacer(modifier = Modifier.height(12.dp))
         Image(
             painter = painterResource(artwork),
             contentDescription = stringResource(contentDescriptionId),
@@ -102,22 +110,23 @@ fun ArtSpaceLayout(
                 .wrapContentSize()
                 .padding(24.dp)
         )
-        Spacer(modifier = Modifier.height(32.dp))
+//        Spacer(modifier = Modifier.height(32.dp))
         Text(text = stringResource(artworkInfo))
+        Spacer(modifier = Modifier.height(32.dp))
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxSize()
         ) {
             Button(
-                onClick = { onBtnClick() },
+                onClick = { backButton() },
                 colors = ButtonDefaults.buttonColors(Color.Cyan),
                 shape = RoundedCornerShape(48.dp)
             ) {
                 Text(text = "Previous")
             }
             Button(
-                onClick = { onBtnClick() },
+                onClick = { nextButton() },
                 colors = ButtonDefaults.buttonColors(Color.Cyan),
                 shape = RoundedCornerShape(48.dp)
             ) {
@@ -129,27 +138,27 @@ fun ArtSpaceLayout(
     }
 }
 
-@Preview (showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun ArtSpaceScreen() {
     var currentStep by remember { mutableStateOf(0) }
 
-    val artworkTitle = when (currentStep){
+    val artworkTitle = when (currentStep) {
         0 -> R.string.title_1
         else -> R.string.title_2
     }
 
-    val artwork = when (currentStep){
+    val artwork = when (currentStep) {
         0 -> R.drawable.artwork_1
         else -> R.drawable.artwork_2
     }
 
-    val contentDescriptionId = when (currentStep){
+    val contentDescriptionId = when (currentStep) {
         0 -> R.string.description_1
         else -> R.string.description_2
     }
 
-    val artworkInfo = when (currentStep){
+    val artworkInfo = when (currentStep) {
         0 -> R.string.info_1
         else -> R.string.info_2
     }
@@ -159,6 +168,7 @@ fun ArtSpaceScreen() {
         artwork = artwork,
         contentDescriptionId = contentDescriptionId,
         artworkInfo = artworkInfo,
-        onBtnClick = {currentStep = (currentStep+1).rem(1)}
+        backButton = { currentStep = (currentStep + 1) },
+        nextButton = { currentStep = (currentStep - 1) }
     )
 }
