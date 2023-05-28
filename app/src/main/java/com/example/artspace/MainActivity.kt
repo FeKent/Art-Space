@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
@@ -65,7 +67,9 @@ fun ArtSpaceLayout(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
         Spacer(modifier = Modifier.height(22.dp))
         Text(
@@ -81,7 +85,7 @@ fun ArtSpaceLayout(
             modifier = Modifier
                 .wrapContentSize()
                 .padding(24.dp)
-                .border(15.dp,Color.White)
+                .border(15.dp, Color.White)
         )
 //        Spacer(modifier = Modifier.height(32.dp))
         Text(text = stringResource(artworkInfo), color = Color.DarkGray)
