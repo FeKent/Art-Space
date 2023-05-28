@@ -4,41 +4,36 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.artspace.ui.theme.ArtSpaceTheme
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.text.font.FontStyle
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +43,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Color.LightGray
                 ) {
                     ArtSpaceScreen()
                 }
@@ -57,29 +52,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-//@OptIn(ExperimentalMaterial3Api::class)
-//@Preview(showBackground = true)
-//@Composable
-//fun ArtSpaceApp() {
-//
-//    Scaffold(topBar = {
-//        CenterAlignedTopAppBar(
-//            title = {
-//                Text(
-//                    text = stringResource(id = R.string.app_name),
-//                    fontSize = 30.sp,
-//                    color = Color.Black,
-//                    fontWeight = FontWeight.Bold
-//                )
-//            },
-//            colors = TopAppBarDefaults.mediumTopAppBarColors(
-//                containerColor = Color(66, 178, 138)
-//            ),
-//        )
-//    }, content = ArtSpaceScreen()
-//    )
-//}
 
 @Composable
 fun ArtSpaceLayout(
@@ -99,7 +71,7 @@ fun ArtSpaceLayout(
         Text(
             text = stringResource(artworkTitle),
             fontSize = 30.sp,
-            color = Color.Gray,
+            color = Color.DarkGray,
             fontStyle = FontStyle.Italic
         )
         Spacer(modifier = Modifier.height(12.dp))
@@ -109,9 +81,10 @@ fun ArtSpaceLayout(
             modifier = Modifier
                 .wrapContentSize()
                 .padding(24.dp)
+                .border(15.dp,Color.White)
         )
 //        Spacer(modifier = Modifier.height(32.dp))
-        Text(text = stringResource(artworkInfo), color = Color.Gray)
+        Text(text = stringResource(artworkInfo), color = Color.DarkGray)
         Spacer(modifier = Modifier.height(32.dp))
         Row(
             horizontalArrangement = Arrangement.Center,
@@ -120,14 +93,15 @@ fun ArtSpaceLayout(
         ) {
             Button(
                 onClick = { backButton() },
-                colors = ButtonDefaults.buttonColors(Color.Cyan),
+                colors = ButtonDefaults.buttonColors(Color(66, 178, 138)),
                 shape = RoundedCornerShape(48.dp)
             ) {
                 Text(text = "Previous")
             }
+            Spacer(modifier = Modifier.width(20.dp))
             Button(
                 onClick = { nextButton() },
-                colors = ButtonDefaults.buttonColors(Color.Cyan),
+                colors = ButtonDefaults.buttonColors(Color(66, 178, 138)),
                 shape = RoundedCornerShape(48.dp)
             ) {
                 Text(text = "Next")
@@ -138,7 +112,7 @@ fun ArtSpaceLayout(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, backgroundColor = 0xFFD3D3D3)
 @Composable
 fun ArtSpaceScreen() {
     var currentStep by remember { mutableStateOf(0) }
