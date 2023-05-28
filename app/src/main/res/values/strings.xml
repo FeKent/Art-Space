@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Art Space</string>
+    <string name="title_1">Green Music Magic</string>
+    <string name="description_1">A woman drawn in green ink, listening to music</string>
+    <string name="info_1">SnippyRex, 29/08/2022</string>
+    <string name="title_2">Myra and Reginald</string>
+    <string name="description_2">A pencil sketch of a small druidic woman, with a squirrel perched on her shoulder</string>
+    <string name="info_2">SnippyRex, 06/09/2022</string>
 </resources>
